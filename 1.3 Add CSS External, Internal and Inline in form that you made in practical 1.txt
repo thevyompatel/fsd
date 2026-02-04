@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration Form</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Internal CSS -->
+    <style>
+        h2 {
+            text-align: center;
+            color: darkblue;
+        }
+        .gender, .languages, .subjects {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="form-box">
+    <h2>Student Registration Form</h2>
+
+    <form>
+
+        <!-- Inline CSS -->
+        <label style="color: brown;">Name:</label>
+        <input type="text" required>
+
+        <label>Email ID:</label>
+        <input type="email" required>
+
+        <label>Phone Number:</label>
+        <input type="tel" pattern="[0-9]{10}" required>
+
+        <div class="gender">
+            <label>Gender:</label><br>
+            <input type="radio" name="gender"> Male
+            <input type="radio" name="gender"> Female
+        </div>
+
+        <label>Date of Birth:</label>
+        <select required>
+            <option>Day</option>
+            <option>1</option>
+            <option>2</option>
+        </select>
+        <select required>
+            <option>Month</option>
+            <option>Jan</option>
+            <option>Feb</option>
+        </select>
+        <select required>
+            <option>Year</option>
+            <option>2002</option>
+            <option>2003</option>
+        </select>
+
+        <div class="languages">
+            <label>Languages Known:</label><br>
+            <input type="checkbox"> English
+            <input type="checkbox"> Hindi
+        </div>
+
+        <label>Address:</label>
+        <textarea rows="3"></textarea>
+
+        <div class="subjects">
+            <label>Subjects:</label><br>
+            <input type="radio" name="sub"> AIML
+            <input type="radio" name="sub"> CSE
+        </div>
+
+        <br>
+        <button type="submit">Submit</button>
+
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>NovaCart — Home</title>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+
+	<body>
+		<a class="skip-link" href="#main">Skip to content</a>
+
+		<header class="site-header">
+			<nav class="nav" aria-label="Primary">
+				<a class="brand" href="3.html" aria-label="NovaCart home">
+					<span class="brand-mark" aria-hidden="true">N</span>
+					<span class="brand-name">NovaCart</span>
+				</a>
+
+				<button
+					class="nav-toggle"
+					type="button"
+					aria-controls="navMenu"
+					aria-expanded="false"
+					data-nav-toggle
+				>
+					<span class="sr-only">Toggle navigation</span>
+					<span class="nav-toggle-bar" aria-hidden="true"></span>
+					<span class="nav-toggle-bar" aria-hidden="true"></span>
+					<span class="nav-toggle-bar" aria-hidden="true"></span>
+				</button>
+
+				<div class="nav-menu" id="navMenu" data-nav-menu>
+					<a class="nav-link is-active" href="3.html">Home</a>
+					<a class="nav-link" href="#products">Products</a>
+				</div>
+
+				<button class="cart-btn" type="button" data-cart-open>
+					<span class="cart-btn-label">Cart</span>
+					<span class="cart-badge" aria-label="Items in cart" data-cart-count>0</span>
+				</button>
+			</nav>
+		</header>
+
+		<main id="main">
+			<section class="hero" aria-label="Hero">
+				<div class="hero-inner">
+					<div class="hero-copy">
+						<p class="hero-kicker">E‑commerce UI • CSS Grid cards • Live cart totals</p>
+						<h1 class="hero-title">Shop smarter with a clean, fast e‑commerce UI</h1>
+						<p class="hero-subtitle">
+							Add items to cart, change quantity, and see the total update.
+						</p>
+						<div class="hero-actions">
+							<a class="btn" href="#products">Browse products</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="section" id="products" aria-label="Products">
+				<div class="section-head">
+					<h2 class="section-title">Products</h2>
+					<p class="section-subtitle">Click “Add to cart” to update cart count & total.</p>
+				</div>
+
+				<div class="product-grid" data-product-grid>
+					<article class="card" data-product data-id="p1" data-name="Wireless Headphones" data-price="2499">
+						<div class="card-media">
+							<div class="card-badge">Hot</div>
+							<div class="card-img" aria-hidden="true">🎧</div>
+						</div>
+						<div class="card-body">
+							<h3 class="card-title">Wireless Headphones</h3>
+							<p class="card-desc">Deep bass, 30h battery, fast charging.</p>
+							<div class="card-row">
+								<div class="price">
+									<span class="price-now" data-price-display>₹2,499</span>
+									<span class="price-was">₹3,199</span>
+								</div>
+								<button class="btn btn-small" type="button" data-add-to-cart>Add to cart</button>
+							</div>
+						</div>
+					</article>
+
+					<article class="card" data-product data-id="p2" data-name="Smart Watch" data-price="1999">
+						<div class="card-media">
+							<div class="card-badge">New</div>
+							<div class="card-img" aria-hidden="true">⌚</div>
+						</div>
+						<div class="card-body">
+							<h3 class="card-title">Smart Watch</h3>
+							<p class="card-desc">Activity tracking + notifications + sleep.</p>
+							<div class="card-row">
+								<div class="price">
+									<span class="price-now" data-price-display>₹1,999</span>
+									<span class="price-was">₹2,499</span>
+								</div>
+								<button class="btn btn-small" type="button" data-add-to-cart>Add to cart</button>
+							</div>
+						</div>
+					</article>
+
+					<article class="card" data-product data-id="p3" data-name="Mechanical Keyboard" data-price="2999">
+						<div class="card-media">
+							<div class="card-badge">-15%</div>
+							<div class="card-img" aria-hidden="true">⌨️</div>
+						</div>
+						<div class="card-body">
+							<h3 class="card-title">Mechanical Keyboard</h3>
+							<p class="card-desc">Tactile switches, per‑key RGB lighting.</p>
+							<div class="card-row">
+								<div class="price">
+									<span class="price-now" data-price-display>₹2,999</span>
+									<span class="price-was">₹3,499</span>
+								</div>
+								<button class="btn btn-small" type="button" data-add-to-cart>Add to cart</button>
+							</div>
+						</div>
+					</article>
+
+					<article class="card" data-product data-id="p4" data-name="Mini Bluetooth Speaker" data-price="1299">
+						<div class="card-media">
+							<div class="card-badge">Deal</div>
+							<div class="card-img" aria-hidden="true">🔊</div>
+						</div>
+						<div class="card-body">
+							<h3 class="card-title">Mini Bluetooth Speaker</h3>
+							<p class="card-desc">Water resistant with punchy sound.</p>
+							<div class="card-row">
+								<div class="price">
+									<span class="price-now" data-price-display>₹1,299</span>
+									<span class="price-was">₹1,799</span>
+								</div>
+								<button class="btn btn-small" type="button" data-add-to-cart>Add to cart</button>
+							</div>
+						</div>
+					</article>
+				</div>
+			</section>
+		</main>
+
+		<footer class="site-footer">
+			<div class="footer-inner">
+				<div>
+					<div class="footer-brand">NovaCart</div>
+					<div class="footer-note">Demo e‑commerce UI for FSD lab.</div>
+				</div>
+				<div class="footer-links">
+					<a href="3.html">Home</a>
+					<a href="#products">Products</a>
+				</div>
+			</div>
+		</footer>
+
+		<div class="overlay" data-cart-overlay hidden></div>
+		<aside class="cart-drawer" aria-label="Cart" aria-hidden="true" data-cart-drawer>
+			<div class="cart-head">
+				<h2 class="cart-title">Your cart</h2>
+				<button class="icon-btn" type="button" data-cart-close aria-label="Close cart">×</button>
+			</div>
+
+			<div class="cart-body">
+				<div class="cart-empty" data-cart-empty>
+					<div class="cart-empty-title">Cart is empty</div>
+					<div class="cart-empty-sub">Add something from the products grid.</div>
+				</div>
+
+				<div class="cart-items" data-cart-items></div>
+			</div>
+
+			<div class="cart-foot">
+				<div class="cart-total-row">
+					<span>Total</span>
+					<strong data-cart-total>₹0</strong>
+				</div>
+				<button class="btn btn-wide" type="button" data-checkout>Checkout</button>
+			</div>
+		</aside>
+
+		<script src="app.js" defer></script>
+	</body>
+</html>

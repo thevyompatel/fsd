@@ -1,0 +1,248 @@
+(() => {
+  const STORAGE_KEY = 'novacart:v1';
+
+  const formatINR = (amount) => {
+    const rupees = Math.round(amount);
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 0,
+    }).format(rupees);
+  };
+
+  const loadCart = () => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return { items: {} };
+      const parsed = JSON.parse(raw);
+      if (!parsed || typeof parsed !== 'object') return { items: {} };
+      if (!parsed.items || typeof parsed.items !== 'object') return { items: {} };
+      return parsed;
+    } catch {
+      return { items: {} };
+    }
+  };
+
+  const saveCart = (cart) => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+  };
+
+  const getCartCount = (cart) => {
+    return Object.values(cart.items).reduce((sum, item) => sum + item.qty, 0);
+  };
+
+  const getCartTotal = (cart) => {
+    return Object.values(cart.items).reduce((sum, item) => sum + item.price * item.qty, 0);
+  };
+
+  const qs = (sel, root = document) => root.querySelector(sel);
+  const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  const cartCountEls = () => qsa('[data-cart-count]');
+
+  const drawer = qs('[data-cart-drawer]');
+  const overlay = qs('[data-cart-overlay]');
+  const emptyState = qs('[data-cart-empty]');
+  const itemsEl = qs('[data-cart-items]');
+  const totalEl = qs('[data-cart-total]');
+
+  const setCartCountUI = (count) => {
+    for (const el of cartCountEls()) {
+      el.textContent = String(count);
+    }
+  };
+
+  const setDrawerOpen = (open) => {
+    if (!drawer || !overlay) return;
+
+    drawer.classList.toggle('is-open', open);
+    drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+    overlay.hidden = !open;
+
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+
+  const renderCart = () => {
+    const cart = loadCart();
+    const count = getCartCount(cart);
+
+    setCartCountUI(count);
+
+    if (!itemsEl || !totalEl) return;
+
+    const items = Object.values(cart.items);
+    const isEmpty = items.length === 0;
+
+    if (emptyState) emptyState.hidden = !isEmpty;
+
+    itemsEl.innerHTML = '';
+
+    for (const item of items) {
+      const row = document.createElement('div');
+      row.className = 'cart-item';
+      row.dataset.cartId = item.id;
+
+      row.innerHTML = `
+        <div class="cart-item-top">
+          <div>
+            <div class="cart-item-title"></div>
+            <div class="cart-item-meta"></div>
+          </div>
+          <button class="link-btn" type="button" data-remove>Remove</button>
+        </div>
+
+        <div class="cart-item-bottom">
+          <div class="qty" aria-label="Quantity">
+            <button type="button" aria-label="Decrease quantity" data-dec>−</button>
+            <span data-qty>1</span>
+            <button type="button" aria-label="Increase quantity" data-inc>+</button>
+          </div>
+          <div class="cart-line-total" data-line-total></div>
+        </div>
+      `;
+
+      qs('.cart-item-title', row).textContent = item.name;
+      qs('.cart-item-meta', row).textContent = `${formatINR(item.price)} each`;
+      qs('[data-qty]', row).textContent = String(item.qty);
+      qs('[data-line-total]', row).textContent = formatINR(item.price * item.qty);
+
+      itemsEl.appendChild(row);
+    }
+
+    totalEl.textContent = formatINR(getCartTotal(cart));
+  };
+
+  const addToCart = ({ id, name, price }) => {
+    const cart = loadCart();
+    const existing = cart.items[id];
+
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cart.items[id] = { id, name, price, qty: 1 };
+    }
+
+    saveCart(cart);
+    renderCart();
+  };
+
+  const updateQty = (id, delta) => {
+    const cart = loadCart();
+    const item = cart.items[id];
+    if (!item) return;
+
+    item.qty += delta;
+    if (item.qty <= 0) {
+      delete cart.items[id];
+    }
+
+    saveCart(cart);
+    renderCart();
+  };
+
+  const removeItem = (id) => {
+    const cart = loadCart();
+    if (!cart.items[id]) return;
+    delete cart.items[id];
+    saveCart(cart);
+    renderCart();
+  };
+
+  const wireNavbar = () => {
+    const toggle = qs('[data-nav-toggle]');
+    const menu = qs('[data-nav-menu]');
+    if (!toggle || !menu) return;
+
+    toggle.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Close menu when clicking a link (mobile)
+    menu.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (!a) return;
+      menu.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  };
+
+  const wireCartDrawer = () => {
+    const openBtn = qs('[data-cart-open]');
+    const closeBtn = qs('[data-cart-close]');
+
+    openBtn?.addEventListener('click', () => {
+      renderCart();
+      setDrawerOpen(true);
+    });
+
+    closeBtn?.addEventListener('click', () => setDrawerOpen(false));
+    overlay?.addEventListener('click', () => setDrawerOpen(false));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setDrawerOpen(false);
+    });
+
+    itemsEl?.addEventListener('click', (e) => {
+      const row = e.target.closest('.cart-item');
+      if (!row) return;
+      const id = row.dataset.cartId;
+      if (!id) return;
+
+      if (e.target.closest('[data-inc]')) updateQty(id, +1);
+      if (e.target.closest('[data-dec]')) updateQty(id, -1);
+      if (e.target.closest('[data-remove]')) removeItem(id);
+    });
+
+    const checkoutBtn = qs('[data-checkout]');
+    checkoutBtn?.addEventListener('click', () => {
+      const cart = loadCart();
+      const total = getCartTotal(cart);
+      if (total <= 0) {
+        alert('Your cart is empty.');
+        return;
+      }
+      alert(`Checkout total: ${formatINR(total)} (demo)`);
+    });
+  };
+
+  const wireProducts = () => {
+    const cards = qsa('[data-product]');
+    if (cards.length === 0) return;
+
+    for (const card of cards) {
+      const addBtn = qs('[data-add-to-cart]', card);
+      if (!addBtn) continue;
+
+      addBtn.addEventListener('click', () => {
+        const id = card.dataset.id;
+        const name = card.dataset.name;
+        const price = Number(card.dataset.price);
+
+        if (!id || !name || !Number.isFinite(price)) return;
+
+        addToCart({ id, name, price });
+        setDrawerOpen(true);
+      });
+    }
+  };
+
+  const init = () => {
+    wireNavbar();
+    wireCartDrawer();
+    wireProducts();
+
+    renderCart();
+
+    // Sync cart count across tabs/windows
+    window.addEventListener('storage', (e) => {
+      if (e.key === STORAGE_KEY) renderCart();
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

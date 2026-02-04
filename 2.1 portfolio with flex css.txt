@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio</title>
+    <link rel="stylesheet" href="2.1.css">
+</head>
+<body>
+
+<!-- ===== Header Section ===== -->
+<header>
+    <div class="container">
+        <h1>Vyom Patel</h1>
+        <p>Web Developer | IoT Enthusiast | Student</p>
+    </div>
+</header>
+
+<!-- ===== Navigation ===== -->
+<nav>
+    <div class="container nav-links">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#certificates">Certificates</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<!-- ===== About Section ===== -->
+<section id="about">
+    <div class="container">
+        <h2>About Me</h2>
+
+        <div class="about-content">
+            <img class="profile-photo" src="C1.jpg" alt="Vyom Patel profile photo">
+
+            <div class="about-text">
+                <p>
+                    I am a passionate computer engineering student with interest in web development,
+                    IoT systems, and data-driven applications. I enjoy building clean, responsive
+                    websites and innovative technology solutions.
+                </p>
+                <p class="bio-meta"><strong>University:</strong> Karnavati University</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Education Section ===== -->
+<section id="education" class="bg">
+    <div class="container">
+        <h2>Education</h2>
+        <div class="project-card">
+            <h3>B.Tech — Computer Science & Engineering</h3>
+            <p><strong>Specialization:</strong> Artificial Intelligence and Machine Learning</p>
+            <p><strong>University:</strong> Karnavati University</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Skills Section ===== -->
+<section id="skills" class="bg">
+    <div class="container">
+        <h2>Skills</h2>
+
+        <div class="skill">
+            <span>HTML & CSS</span>
+            <div class="progress"><div class="html"></div></div>
+        </div>
+
+        <div class="skill">
+            <span>JavaScript</span>
+            <div class="progress"><div class="js"></div></div>
+        </div>
+
+        <div class="skill">
+            <span>Python</span>
+            <div class="progress"><div class="python"></div></div>
+        </div>
+
+        <div class="skill">
+            <span>IoT</span>
+            <div class="progress"><div class="iot"></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Projects Section ===== -->
+<section id="projects">
+    <div class="container">
+        <h2>Projects</h2>
+
+        <div class="project-card">
+            <h3>IoT Hand Gesture Mouse</h3>
+            <p>Controlled mouse movements using ESP32 and MPU6050 with cloud integration.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>Diabetes Prediction System</h3>
+            <p>Machine learning-based classification using KNN and Decision Tree.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>Personal Portfolio Website</h3>
+            <p>Responsive portfolio using HTML, CSS, and modern UI principles.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Certificates Section ===== -->
+<section id="certificates" class="bg">
+    <div class="container">
+        <h2>Certificates</h2>
+
+        <div class="certificates-grid">
+            <div class="certificate-card">
+                <h3>Unix and Shell Programming</h3>
+                <p>Learning Linux Command Line.</p>
+                <p>Unix Essential Training.</p>
+
+            </div>
+
+            <div class="certificate-card">
+                <h3>IOT</h3>
+                <p>IoT Foundations: Standards and Ecosystems.</p>
+                <p>IoT Foundations: Low-Power Wireless Networking.</p>
+                <p>IoT Foundations: Fundamentals.</p>
+                <p>IIoT Foundations: Device Management.</p>
+            </div>
+
+            <div class="certificate-card">
+                <h3>LLM</h3>
+                <p>Building a RAG Solution from Scratch.</p>
+                <p>Fine-Tuning LLMs for Cybersecurity: Mistral, Llama, AutoTrain, AutoGen, and LLM Agents.</p>
+                <p>Fine-Tuning for LLMs: from Beginner to Advanced.</p>
+                <p>Introduction to Large Language Models.</p>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Contact Section ===== -->
+<section id="contact" class="bg">
+    <div class="container">
+        <h2>Contact Me</h2>
+        <p>Email: vp@example.com</p>
+        <p>Phone: +91 XXXXXXXX90</p>
+        <p>LinkedIn: www.linkedin.com/in/vyom-patel-206103376</p>
+        <p>Github: https://github.com/thevyompatel</p>
+
+    </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+    <div class="container">
+        <p>© 2026 Vyom Patel | All Rights Reserved</p>
+    </div>
+</footer>
+
+</body>
+</html>
